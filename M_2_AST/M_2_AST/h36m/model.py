@@ -166,33 +166,33 @@ class MixerBlock(nn.Module):
         x = x + y + z
         
         # # print(x.shape,'3') # [50, 10, 66]
-        # y = self.LN(x)
-        # y = self.fc_in(y)
-        # y = self.mlp_block_channel_mixing_DynaMixerOperation(y)
-        # y = self.fc_out(y) 
+        y = self.LN(x)
+        y = self.fc_in(y)
+        y = self.mlp_block_channel_mixing_DynaMixerOperation(y)
+        y = self.fc_out(y) 
 
-        # if self.use_se:
-        #     y = self.se(y)
+        if self.use_se:
+            y = self.se(y)
          
 
-        # x = x + y
+        x = x + y
         # print(x.shape,'4') # [50, 10, 66]
 
 
-                # print(x.shape,'1')   # [50, 10, 66]   
-        y = self.LN(x)    
-        y = y.transpose(1, 2)  # y = [50, 50, 10]
-        z = y
-        z = self.fc_(z)  # spatial mixer
-        # y = self.mlp_block_token_mixing_DynaMixerOperation(y)
-        # y = y.transpose(1, 2)
-        z = z.transpose(1, 2)
+        #         # print(x.shape,'1')   # [50, 10, 66]   
+        # y = self.LN(x)    
+        # y = y.transpose(1, 2)  # y = [50, 50, 10]
+        # z = y
+        # z = self.fc_(z)  # spatial mixer
+        # # y = self.mlp_block_token_mixing_DynaMixerOperation(y)
+        # # y = y.transpose(1, 2)
+        # z = z.transpose(1, 2)
         
-        if self.use_se:
-            # y = self.se(y)
-            z = self.se(z)
+        # if self.use_se:
+        #     # y = self.se(y)
+        #     z = self.se(z)
 
-        x = x + z
+        # x = x + z
         
         return x
 
